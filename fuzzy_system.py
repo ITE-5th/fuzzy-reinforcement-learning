@@ -20,7 +20,8 @@ class FuzzySystem:
         temp = -temp / (2 * np.power(self.widths, 2))
         temp = np.prod(np.exp(temp), axis=1, keepdims=True)
         t = np.sum(temp)
-        return math.tanh(self.alpha * (temp.T @ self.outs) / t)
+        temp = math.tanh(self.alpha * (temp.T @ self.outs) / t)
+        return temp
 
     @staticmethod
     def load(params_path):
