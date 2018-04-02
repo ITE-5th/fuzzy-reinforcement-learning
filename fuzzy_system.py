@@ -1,4 +1,5 @@
 import math
+import pickle
 
 import numpy as np
 
@@ -19,3 +20,10 @@ class FuzzySystem:
         temp = -temp / (2 * np.power(self.widths, 2))
         temp = np.prod(np.exp(temp), axis=1, keepdims=True)
         return math.tanh(self.alpha * (temp.T @ self.outs) / (np.sum(temp)))
+
+    @staticmethod
+    def load(params_path):
+        with open(params_path, "rb") as f:
+            params = pickle.load(f)
+        return FuzzySystem(params=params["best"], number_of_rules=params["number_of_rules"],
+                           dimension=params["dimension"])
