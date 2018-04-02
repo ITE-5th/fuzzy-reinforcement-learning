@@ -9,5 +9,5 @@ done = False
 while not done:
     env.render()
     action = fuzzy_system.take_action(observation)
-    action = action > 0
+    action = int(action > 0)
     observation, reward, done, info = env.step(action)
