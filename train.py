@@ -49,3 +49,4 @@ optimizer = ps.single.LocalBestPSO(n_particles=100, dimensions=(2 * dimension + 
 cost, pos = optimizer.optimize(fitness, print_step=1, iters=1000, verbose=3)
 with open("result.pkl", "wb") as f:
     pickle.dump({"cost": cost, "best": pos, "dimension": dimension, "number_of_rules": number_of_rules}, f)
+env.close()

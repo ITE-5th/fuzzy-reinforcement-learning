@@ -16,7 +16,7 @@ class FuzzySystem:
 
     def take_action(self, state):
         state = state.reshape(1, -1)
-        temp = np.power(state - self.centers, 2)
+        temp = np.power(self.centers - state, 2)
         temp = -temp / (2 * np.power(self.widths, 2))
         temp = np.prod(np.exp(temp), axis=1, keepdims=True)
         t = np.sum(temp)
