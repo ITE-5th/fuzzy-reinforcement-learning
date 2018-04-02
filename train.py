@@ -11,7 +11,7 @@ np.seterr(divide='ignore', invalid='ignore')
 gym.logger.set_level(40)
 number_of_rules = 2
 discount_factor = 0.97
-number_of_episodes = 1000
+number_of_episodes = 100
 horizon = 200
 env: TimeLimit = gym.make('CartPole-v0')
 dimension = env.observation_space.shape[0]
@@ -46,8 +46,10 @@ def fitness(X):
 
 
 options = {'c1': 2.05, 'c2': 2.05, 'w': 0.729, "k": 30, 'p': 2}
-optimizer = ps.single.LocalBestPSO(n_particles=100, dimensions=(2 * dimension + 1) * number_of_rules + 1,
-                                   options=options)
+# optimizer = ps.single.LocalBestPSO(n_particles=100, dimensions=(2 * dimension + 1) * number_of_rules + 1,
+#                                    options=options)
+optimizer = ps.single.GlobalBestPSO(n_particles=100, dimensions=(2 * dimension + 1) * number_of_rules + 1,
+                                    options=options)
 print("begin training")
 cost, pos = optimizer.optimize(fitness, print_step=1, iters=1000, verbose=3)
 with open("result.pkl", "wb") as f:
