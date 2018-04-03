@@ -17,7 +17,7 @@ env: TimeLimit = gym.make('CartPole-v0')
 env.seed()
 dimension = env.observation_space.shape[0]
 
-randoms = np.random.randint(low=0, high=4000, size=number_of_episodes)
+randoms = np.random.randint(low=0, high=number_of_episodes, size=number_of_episodes)
 
 
 def run_episode(rand, fuzzy_system: FuzzySystem):
@@ -55,7 +55,7 @@ optimizer = ps.single.LocalBestPSO(n_particles=100, dimensions=(2 * dimension + 
 # optimizer = ps.single.GlobalBestPSO(n_particles=100, dimensions=(2 * dimension + 1) * number_of_rules + 1,
 #                                     options=options)
 print("begin training")
-cost, pos = optimizer.optimize(fitness, print_step=1, iters=100, verbose=3)
+cost, pos = optimizer.optimize(fitness, print_step=1, iters=20, verbose=3)
 with open("result.pkl", "wb") as f:
     pickle.dump({"cost": cost, "best": pos, "dimension": dimension, "number_of_rules": number_of_rules}, f)
 env.close()
