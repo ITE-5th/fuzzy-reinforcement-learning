@@ -1,10 +1,11 @@
+import numpy as np
 import gym
 
 from fuzzy_system import FuzzySystem
 
 fuzzy_system = FuzzySystem.load("result.pkl")
 env = gym.make('CartPole-v0')
-env.seed(200)
+env.seed(int(np.random.randint(0, 100, 1)[0]))
 observation = env.reset()
 done = False
 while True:
@@ -12,8 +13,9 @@ while True:
     action = fuzzy_system.take_action(observation)
     action = int(action > 0)
     observation, reward, done, info = env.step(action)
-    if done:
-        break
+    print(observation)
+    # if done:
+    #     break
     # time.sleep(0.05)
 
 env.close()
